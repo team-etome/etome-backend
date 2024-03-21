@@ -49,16 +49,21 @@ class AdminLoginView(APIView):
             return JsonResponse({'error': 'Email and password are required'}, status=400)
 
         try:
-            user = Admin.objects.get(emailid=email)
+            user = Admin.objects.get(email_id=email)
         except Admin.DoesNotExist:
             return JsonResponse({'error': 'No admin found with this email'}, status=404)
         except Exception as e:
             return JsonResponse({'error': 'An unexpected error occurred: ' + str(e)}, status=500)
         
-
-        if check_password(password, user.password):
-            admin_token = get_token(user, user_type='admin')
-            return JsonResponse({'message': 'Login successful', 'token': admin_token})
+        if user.school is True:
+            if check_password(password, user.password):
+                school_token = get_token(user, user_type='school')
+                return JsonResponse({'message': 'Login successful', 'token': school_token})
+        elif user.school is False:
+            if check_password(password, user.password):
+                college_token = get_token(user, user_type='college')
+                return JsonResponse({'message': 'Login successful', 'token': college_token })
+    
         else:
             return JsonResponse({'error': 'Invalid email or password'}, status=401)
         
