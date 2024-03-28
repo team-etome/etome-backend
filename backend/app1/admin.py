@@ -5,7 +5,7 @@ from app1.models import *
 admin.site.register(God)
 admin.site.register(Admin)
 admin.site.register(Subject)
-admin.site.register(Class)
+admin.site.register(ClassName)
 admin.site.register(Teacher)
 admin.site.register(Student)
 

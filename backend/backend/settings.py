@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
-    'app1'
+    'app1',
+    'teacher',
+    'arna',
 ]
 
 MIDDLEWARE = [
